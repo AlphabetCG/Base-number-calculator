@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Base Converter</h1>
+    <div class="container">
+        <label for="decimal">Enter a Decimal Number:</label>
+        <input type="number" id="decimal" placeholder="Enter a number">
+        <button onclick="convert()">Convert</button>
+
+        <p><strong>Binary:</strong> <span id="binary"></span></p>
+        <p><strong>Octal:</strong> <span id="octal"></span></p>
+        <p><strong>Hexadecimal:</strong> <span id="hexadecimal"></span></p>
+    </div>
+
+    <script>
+        function convert() {
+            let decimal = document.getElementById('decimal').value;
+            if (decimal === '') {
+                alert('Please enter a number');
+                return;
+            }
+
+            let binary = decimalToBinary(decimal);
+            let octal = decimalToOctal(decimal);
+            let hexadecimal = decimalToHexadecimal(decimal);
+
+            document.getElementById('binary').innerText = binary;
+            document.getElementById('octal').innerText = octal;
+            document.getElementById('hexadecimal').innerText = hexadecimal;
+        }
+
+        function decimalToBinary(num) {
+            let binary = '';
+            while (num > 0) {
+                binary = (num % 2) + binary;
+                num = Math.floor(num / 2);
+            }
+            return binary || '0';
+        }
+
+        function decimalToOctal(num) {
+            let octal = '';
+            while (num > 0) {
+                octal = (num % 8) + octal;
+                num = Math.floor(num / 8);
+            }
+            return octal || '0';
+        }
+
+        function decimalToHexadecimal(num) {
+            const hexDigits = '0123456789ABCDEF';
+            let hex = '';
+            while (num > 0) {
+                hex = hexDigits[num % 16] + hex;
+                num = Math.floor(num / 16);
+            }
+            return hex || '0';
+        }
+    </script>
+
+</body>
+</html>
